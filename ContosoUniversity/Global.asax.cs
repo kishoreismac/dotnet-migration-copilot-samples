@@ -5,6 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
+using ContosoUniversity.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ContosoUniversity
@@ -13,6 +14,10 @@ namespace ContosoUniversity
     {
         protected void Application_Start()
         {
+            // Initialise the OpenTelemetry logging pipeline first so that all
+            // subsequent startup log messages are captured.
+            LoggingService.Initialize();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -20,6 +25,13 @@ namespace ContosoUniversity
             
             // Initialize database with EF Core
             InitializeDatabase();
+        }
+
+        protected void Application_End()
+        {
+            // Flush and dispose the OpenTelemetry pipeline to ensure any
+            // buffered log records are exported before the process exits.
+            LoggingService.Shutdown();
         }
 
         private void InitializeDatabase()
@@ -35,3 +47,4 @@ namespace ContosoUniversity
         }
     }
 }
+
