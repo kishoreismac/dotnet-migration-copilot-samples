@@ -29,9 +29,18 @@ OpenTelemetry-based logging pipeline built on `Microsoft.Extensions.Logging.ILog
 
 ### Phase 2 – Dependencies
 - Add OpenTelemetry NuGet packages compatible with .NET Framework 4.6.2+:
-  - `OpenTelemetry` 1.9.0
-  - `OpenTelemetry.Exporter.Console` 1.9.0
-  - `OpenTelemetry.Extensions.Logging` 1.9.0
+  - `OpenTelemetry` 1.15.3
+  - `OpenTelemetry.Api` 1.15.3
+  - `OpenTelemetry.Api.ProviderBuilderExtensions` 1.15.3 (provides `AddOpenTelemetry()` logger extension)
+  - `OpenTelemetry.Exporter.Console` 1.15.3
+  - `Microsoft.Extensions.Logging` 10.0.0 (required by OTel 1.15.3)
+  - `Microsoft.Extensions.Logging.Abstractions` 10.0.0
+  - `Microsoft.Extensions.Logging.Configuration` 10.0.0
+  - `Microsoft.Extensions.DependencyInjection.Abstractions` 10.0.0
+  - `Microsoft.Extensions.Diagnostics.Abstractions` 10.0.0
+  - `Microsoft.Extensions.Options` 10.0.0
+  - `System.Diagnostics.DiagnosticSource` 10.0.0
+  - Note: OTel 1.15.3 selected to resolve GHSA-g94r-2vxg-569j (patched in 1.15.3)
 - Update `packages.config` and `ContosoUniversity.csproj`
 
 ### Phase 3 – Configuration
