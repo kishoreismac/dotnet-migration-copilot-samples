@@ -1,5 +1,5 @@
 ---
-name: modernize-dotnet
+name: app-modernize-dotnet
 description: Focuses on upgrading and modernizing applications through a structured, multi-stage workflow.
 mcp-servers:
   Modernization:
